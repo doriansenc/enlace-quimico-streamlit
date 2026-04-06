@@ -404,9 +404,9 @@ def build_conclusion(a: pd.Series, b: pd.Series) -> str:
     return " ".join(pieces)
 
 
-st.title("🧪 Explorador interactivo de enlace químico")
+st.title("🧪 Explorador interactivo de enlaces químicos con elementos de la tabla periódica")
 st.caption(
-    "Analiza cualquier pareja de elementos de la tabla periódica mediante electronegatividad (Pauling y Mulliken) y un diagrama conceptual inspirado en Arkel–Ketelaar."
+    "Analiza cualquier pareja de elementos de la tabla periódica mediante electronegatividad (Pauling y Mulliken) y un diagrama conceptual inspirado en el triángulo de Arkel–Ketelaar."
 )
 
 summary_col1, summary_col2, summary_col3 = st.columns(3)
@@ -605,7 +605,7 @@ with tab3:
 with tab4:
     row_a = get_row(st.session_state["element_a"])
     row_b = get_row(st.session_state["element_b"])
-    st.subheader("Diagrama conceptual inspirado en Arkel–Ketelaar")
+    st.subheader("Diagrama conceptual inspirado en el triángulo de Arkel–Ketelaar")
     st.caption("Esta visualización es didáctica: usa Δχ de Pauling y electronegatividad promedio para mostrar si la pareja se acerca más al carácter iónico, covalente o metálico.")
 
     arkel = arkel_data(row_a, row_b)
