@@ -42,11 +42,3 @@ streamlit run app.py
 - No todos tienen datos completos para todos los métodos.
 - Cuando falta un dato, la app muestra la ficha del elemento y avisa que el método no puede aplicarse con rigor.
 
-## Personalización rápida
-
-Puedes cambiar fácilmente:
-
-- el título de la app,
-- el color del tema en `.streamlit/config.toml`,
-- los ejemplos rápidos del sidebar,
-- los textos de explicación en `app.py`.
