@@ -406,7 +406,7 @@ def build_conclusion(a: pd.Series, b: pd.Series) -> str:
 
 st.title("🧪 Explorador interactivo de enlaces químicos con elementos de la tabla periódica")
 st.caption(
-    "Analiza cualquier pareja de elementos de la tabla periódica mediante electronegatividad (Pauling y Mulliken) y un diagrama conceptual inspirado en el triángulo de Arkel–Ketelaar."
+    "La aplicación analiza el tipo de enlace predominante entre dos elementos seleccionados de la tabla periódica, usando la diferencia de electronegatividad (Pauling y Mulliken) y una interpretación conceptual basada en el triángulo de Arkel–Ketelaar."
 )
 
 summary_col1, summary_col2, summary_col3 = st.columns(3)
