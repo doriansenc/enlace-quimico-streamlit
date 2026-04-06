@@ -16,7 +16,23 @@ st.set_page_config(
 )
 
 
-DATA_PATH = Path(__file__).parent / "data" / "master_elements_118.csv"
+BASE_DIR = Path(__file__).parent
+
+possible_paths = [
+    BASE_DIR / "data" / "master_elements_118.csv",
+    BASE_DIR / "master_elements_118.csv",
+]
+
+DATA_PATH = None
+for p in possible_paths:
+    if p.exists():
+        DATA_PATH = p
+        break
+
+if DATA_PATH is None:
+    raise FileNotFoundError(
+        "No se encontró master_elements_118.csv ni en la raíz ni en la carpeta data/."
+    )
 
 
 @st.cache_data
