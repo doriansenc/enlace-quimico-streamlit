@@ -51,7 +51,14 @@ SYMBOLS = DF["symbol"].tolist()
 DEFAULT_A = "Na"
 DEFAULT_B = "Cl"
 
-for key, value in {"element_a": DEFAULT_A, "element_b": DEFAULT_B}.items():
+defaults = {
+    "element_a": DEFAULT_A,
+    "element_b": DEFAULT_B,
+    "tab_element_a": DEFAULT_A,
+    "tab_element_b": DEFAULT_B,
+}
+
+for key, value in defaults.items():
     if key not in st.session_state:
         st.session_state[key] = value
 
@@ -80,9 +87,21 @@ EXAMPLES = {
 }
 
 
+def sync_from_sidebar() -> None:
+    st.session_state["tab_element_a"] = st.session_state["element_a"]
+    st.session_state["tab_element_b"] = st.session_state["element_b"]
+
+
+def sync_from_tab() -> None:
+    st.session_state["element_a"] = st.session_state["tab_element_a"]
+    st.session_state["element_b"] = st.session_state["tab_element_b"]
+
+
 def set_example(a: str, b: str) -> None:
     st.session_state["element_a"] = a
     st.session_state["element_b"] = b
+    st.session_state["tab_element_a"] = a
+    st.session_state["tab_element_b"] = b
 
 
 for label, (a, b) in EXAMPLES.items():
@@ -128,12 +147,14 @@ st.sidebar.selectbox(
     options=SYMBOLS,
     key="element_a",
     format_func=lambda s: f"{s} — {NAME_MAP[s]}",
+    on_change=sync_from_sidebar,
 )
 st.sidebar.selectbox(
     "Elemento B",
     options=SYMBOLS,
     key="element_b",
     format_func=lambda s: f"{s} — {NAME_MAP[s]}",
+    on_change=sync_from_sidebar,
 )
 
 # Refresh rows after possible sidebar selection
@@ -460,24 +481,17 @@ with tab2:
             "Elemento A",
             options=SYMBOLS,
             key="tab_element_a",
-            index=SYMBOLS.index(st.session_state["element_a"]),
             format_func=lambda s: f"{s} — {NAME_MAP[s]}",
+            on_change=sync_from_tab,
         )
     with right:
         st.selectbox(
             "Elemento B",
             options=SYMBOLS,
             key="tab_element_b",
-            index=SYMBOLS.index(st.session_state["element_b"]),
             format_func=lambda s: f"{s} — {NAME_MAP[s]}",
+            on_change=sync_from_tab,
         )
-
-    if st.session_state["tab_element_a"] != st.session_state["element_a"]:
-        st.session_state["element_a"] = st.session_state["tab_element_a"]
-        st.rerun()
-    if st.session_state["tab_element_b"] != st.session_state["element_b"]:
-        st.session_state["element_b"] = st.session_state["tab_element_b"]
-        st.rerun()
 
     row_a = get_row(st.session_state["element_a"])
     row_b = get_row(st.session_state["element_b"])
