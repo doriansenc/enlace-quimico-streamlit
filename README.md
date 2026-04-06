@@ -40,5 +40,5 @@ streamlit run app.py
 
 - La app incluye los 118 elementos.
 - No todos tienen datos completos para todos los métodos.
-- Cuando falta un dato, la app muestra la ficha del elemento y avisa que el método no puede aplicarse con rigor.
+- Cuando falta un dato, la app muestra la ficha del elemento y avisa que el método no puede aplicarse.
 
